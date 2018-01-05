@@ -1,9 +1,15 @@
 export class TalkService {
+  constructor() {
+    this.endpoint = 'http://localhost:3000/';
+  }
   findAllSpeakers() {
-    return fetch('http://localhost:3000/speakers', { method: 'GET' }).then(
-      resp => {
-        return resp.json();
-      }
+    return fetch(this.endpoint + 'speakers', { method: 'GET' }).then(resp =>
+      resp.json()
+    );
+  }
+  findAllSessions() {
+    return fetch(this.endpoint + 'sessions', { method: 'GET' }).then(resp =>
+      resp.json()
     );
   }
 }

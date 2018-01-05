@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dist": "webpack",
-    "start":
-      "concurrently --kill-others \"webpack-dev-server\" \"json-server db.json\"",
+    "start": "concurrently --kill-others \"webpack-dev-server\" \"json-server db.json\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,8 +21,16 @@
   "homepage": "https://github.com/AlexGeb/conference-app#readme",
   "devDependencies": {
     "concurrently": "^3.5.1",
+    "css-loader": "^0.28.8",
+    "html-loader": "^0.5.4",
     "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta.3",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.9"
   }
 }
