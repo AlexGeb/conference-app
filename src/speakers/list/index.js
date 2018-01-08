@@ -3,16 +3,16 @@ export class SpeakerList {
     this.talkSvc = talkSvc;
   }
 
-  render(idView) {
-    this.talkSvc.findAllSpeakers().then(speakers => {
+  getView() {
+    return this.talkSvc.findAllSpeakers().then(speakers => {
       let listOfSpeakers = `<ul class="list-group">`;
       speakers.forEach(sp => {
-        listOfSpeakers += `<li class="list-group-item"> ${sp.firstname} ${
-          sp.lastname
-        } </li>`;
+        listOfSpeakers += `<li class="list-group-item"><a href="${
+          location.hash
+        }/${sp.id}"> ${sp.firstname} ${sp.lastname} </a></li>`;
       });
       listOfSpeakers += `</ul>`;
-      document.getElementById(idView).innerHTML = listOfSpeakers;
+      return listOfSpeakers;
     });
   }
 }

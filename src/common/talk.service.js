@@ -12,4 +12,25 @@ export class TalkService {
       resp.json()
     );
   }
+  findSessionById(id) {
+    return fetch(this.endpoint + 'sessions/' + id, { method: 'GET' }).then(
+      resp => resp.json()
+    );
+  }
+  findSpeakerById(id) {
+    return fetch(this.endpoint + 'speakers/' + id, { method: 'GET' }).then(
+      resp => resp.json()
+    );
+  }
+  findSessionIdBySpeakerId(id_speaker) {
+    return this.findAllSessions().then(resp =>
+      resp
+        .filter(sess => {
+          return sess.speakers && sess.speakers.includes(id_speaker);
+        })
+        .map(sess => {
+          return { id: sess.id, title: sess.title };
+        })
+    );
+  }
 }

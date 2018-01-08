@@ -3,8 +3,8 @@ export class SessionList {
     this.talkSvc = talkSvc;
   }
 
-  render(idView) {
-    this.talkSvc.findAllSessions().then(sessions => {
+  getView() {
+    return this.talkSvc.findAllSessions().then(sessions => {
       let listOfSess = `<ul class="list-group">`;
       sessions.forEach(sess => {
         listOfSess += `<li class="list-group-item"><a href="${location.hash}/${
@@ -12,7 +12,7 @@ export class SessionList {
         }"> ${sess.title} </a></li>`;
       });
       listOfSess += `</ul>`;
-      document.getElementById(idView).innerHTML = listOfSess;
+      return listOfSess;
     });
   }
 }

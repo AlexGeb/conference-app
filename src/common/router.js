@@ -1,27 +1,38 @@
 export class Router {
-  constructor() {
+  constructor(templator, idView) {
+    this.view = idView;
+    this.templator = templator;
     this.routes = {};
     this.el = null;
-    window.addEventListener('hashchange', router);
-    window.addEventListener('load', router);
   }
-
-  route(path, templateId, controller) {
-    this.routes[path] = { templateId, controller };
+  /** route registering function */
+  route(path, controller) {
+    this.routes[path] = { controller };
   }
 
   router() {
     // Lazy load view element:
-    el = el || document.getElementById('view');
+    this.el = this.el || document.getElementById(this.view);
     // Current route url (getting rid of '#' in hash as well):
-    const url = location.hash.slice(1) || '/';
+    let url = location.hash.slice(1) || '/';
+    const param = url.split('/')[1];
+    if (param) {
+      console.log('param in url : ', param);
+      url = url.split('/')[0] + '/:id';
+    }
     // Get route by url:
     const route = this.routes[url];
     // Do we have both a view and a route?
-    if (el && route.controller) {
-      // TODO : render the template
+    if (this.el && route && route.controller) {
+      // render the template
       // Render route template with John Resig's template engine:
-      // el.innerHTML = tmpl(route.templateId, new route.controller());
+      const self = this;
+      this.templator(route.controller).then(view => {
+        self.el.innerHTML = view;
+        if (route.controller.postRender) {
+          route.controller.postRender();
+        }
+      });
     }
   }
 }
