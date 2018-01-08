@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "cordova": "webpack --config webpack.config.cordova.js",
     "dist": "webpack",
     "start": "concurrently --kill-others \"webpack-dev-server\" \"json-server db.json\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +30,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "async--await": "^1.0.2",
     "bootstrap": "^4.0.0-beta.3",
     "jquery": "^3.2.1",
     "popper.js": "^1.12.9"
